@@ -1,6 +1,8 @@
 <h1 class="text-3xl mt-4 mx-auto font-bold">
   Hello world! <fa-icon [icon]="faCoffee"></fa-icon>
 </h1>
-<button (click)="showSuccess()">Show toastr</button>
-<button (click)="showAlert()">Alert</button>
-
+<div class="w-1/4 flex justify-between">
+  <button class="button-pink" (click)="showSuccess()">Show toastr</button>
+  <button class="button-blue" (click)="showAlert()">Alert</button>
+  <button class="button-white" (click)="showAlert()">Alert</button>
+</div>
