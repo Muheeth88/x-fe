@@ -1,0 +1,4 @@
+.mainBody{
+    max-height: calc(100vh - 104px) !important;
+    overflow: auto;
+}

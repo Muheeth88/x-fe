@@ -1,8 +1,5 @@
-<h1 class="text-3xl mt-4 mx-auto font-bold">
-  Hello world! <fa-icon [icon]="faCoffee"></fa-icon>
-</h1>
-<div class="w-1/4 flex justify-between">
-  <button class="button-pink" (click)="showSuccess()">Show toastr</button>
-  <button class="button-blue" (click)="showAlert()">Alert</button>
-  <button class="button-white" (click)="showAlert()">Alert</button>
-</div>
+<app-nav-bar></app-nav-bar>
+<body class="mainBody">
+    <router-outlet></router-outlet>
+</body>
+<app-footer></app-footer>
