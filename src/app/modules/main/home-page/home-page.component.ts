@@ -10,6 +10,8 @@ export class HomePageComponent implements OnInit{
 
   constructor( private restApiService: RestApiService) {}
 
+  movieList: [] = [];
+
   ngOnInit(): void {
     this.getAllMovies();
   }
@@ -17,12 +19,17 @@ export class HomePageComponent implements OnInit{
   getAllMovies() {
     this.restApiService.getAllMovies()
     .subscribe({
-      next: ((res) => {
+      next: ((res: any) => {
         console.log(res, "!!!");
+        this.movieList = res;
       }),
       error: ((err) => {
         console.log(err.message);
       })
     })
+  }
+
+  handleClick(movie: any) {
+    console.log(movie?.movieId);
   }
 }
