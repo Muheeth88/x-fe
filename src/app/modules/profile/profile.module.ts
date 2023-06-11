@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
+import { DialogModule } from 'primeng/dialog';
+
 
 
 @NgModule({
@@ -11,7 +13,8 @@ import { ProfileComponent } from './profile.component';
   ],
   imports: [
     CommonModule,
-    ProfileRoutingModule
+    ProfileRoutingModule,
+    DialogModule
   ]
 })
 export class ProfileModule { }

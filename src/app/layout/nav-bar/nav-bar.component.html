@@ -1,13 +1,11 @@
 <header class="nav-bar">
-   <div class="flex justify-between">
+  <div class="flex justify-between">
     <span class="logo mx-3">
-        <img class="h-16 nav-logo" src="./assets/NavLogo.png" alt="logo">
+      <img class="h-16 nav-logo" src="./assets/NavLogo.png" alt="logo" />
     </span>
     <span class="nav-links flex items-center font-medium text-base text-white gap-5 mx-4">
-        <a href="">Home</a>
-        <a href="">About</a>
-        <a href="">Contact Us</a>
-        <a href="">Sign In</a>
+      <button (click)="goToHomePage()">Home</button>
+      <button (click)="goToMyProfile()">My Profile</button>
     </span>
-   </div>
+  </div>
 </header>
