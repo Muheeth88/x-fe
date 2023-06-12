@@ -48,7 +48,7 @@ export class RestApiService {
     return this.http.post(`${this.baseUrl}/movies/likes`, body); 
   }
 
-  // ----------- Movies
+  // -----------get all Movies
 
   getAllMovies() {
     return new Observable((observable) => {
@@ -69,6 +69,41 @@ export class RestApiService {
   // -------------------get movie by Id
   getMovieById(movieId: any) {
     return this.http.get(`${this.baseUrl}/movies/${movieId}`)
+  }
+
+  // ---------------- add movie
+  addMovie(body: any) {
+    return this.http.post(`${this.baseUrl}/movies`, body);
+  }
+
+  // ------------------get genres
+  getAllGenres() {
+    return this.http.get(`${this.baseUrl}/movies/genres`)
+  }
+
+  // ------------------- get all reviews
+  getAllReviews() {
+    return this.http.get(`${this.baseUrl}/movies/reviews`)
+  }
+
+  // ------------------ get review by movieId
+  getReviewsByMovieId(movieId: number) {
+    return this.http.get(`${this.baseUrl}/movies/reviews/${movieId}`)
+  }
+
+  // ------------------------ add a review
+  addReview(body: any) {
+    return this.http.post(`${this.baseUrl}/movies/reviews`, body)
+  }
+
+  // ----------------------- edit a review
+  editReview(reviewId: number, body: any) {
+    return this.http.put(`${this.baseUrl}/movies/reviews/${reviewId}`, body)
+  }
+
+  // --------------------------- delete a review
+  deleteReview(reviewId: number) {
+    return this.http.delete(`${this.baseUrl}/movies/review/${reviewId}`)
   }
 
 }
