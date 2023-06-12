@@ -34,10 +34,10 @@
                     </p>
                 </div>
                 <ng-template pTemplate="footer">
-                    <button *ngIf="!userDetails.likes.includes(movie.movieId)" (click)="addToLikeList(movie.movieId)" class="button-blue mx-1"> <fa-icon class="text-white mr-1" size="sm" [icon]="faHeart"></fa-icon>Like</button>
-                    <button *ngIf="userDetails.likes.includes(movie.movieId)" (click)="addToLikeList(movie.movieId)" class="button-blue mx-1"> <fa-icon class="text-red-700 mr-1" size="sm" [icon]="faHeart"></fa-icon>Liked</button>
-                    <button *ngIf="!userDetails.watchList.includes(movie.movieId)" (click)="addToWatchList(movie.movieId)" class="button-pink mx-1"> Add to Watchlist <fa-icon class="text-white mr-1" size="sm" [icon]="faBookmark"></fa-icon></button>
-                    <button *ngIf="userDetails.watchList.includes(movie.movieId)" (click)="addToWatchList(movie.movieId)" class="button-pink mx-1"> Watchlisted <fa-icon class="text-white mr-1" size="sm" [icon]="faBookmark"></fa-icon></button>
+                    <button *ngIf="!userDetails?.likes?.includes(movie.movieId)" (click)="addToLikeList(movie.movieId)" class="button-blue mx-1"> <fa-icon class="text-white mr-1" size="sm" [icon]="faHeart"></fa-icon>Like</button>
+                    <button *ngIf="userDetails?.likes?.includes(movie.movieId)" (click)="addToLikeList(movie.movieId)" class="button-blue mx-1"> <fa-icon class="text-red-700 mr-1" size="sm" [icon]="faHeart"></fa-icon>Liked</button>
+                    <button *ngIf="!userDetails?.watchList?.includes(movie.movieId)" (click)="addToWatchList(movie.movieId)" class="button-pink mx-1"> Add to Watchlist <fa-icon class="text-white mr-1" size="sm" [icon]="faBookmark"></fa-icon></button>
+                    <button *ngIf="userDetails?.watchList?.includes(movie.movieId)" (click)="addToWatchList(movie.movieId)" class="button-pink mx-1"> Watchlisted <fa-icon class="text-white mr-1" size="sm" [icon]="faBookmark"></fa-icon></button>
                 </ng-template>
             </p-card>
         </div>

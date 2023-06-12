@@ -7,19 +7,22 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MovieDetailsComponent } from './home-page/movie-details/movie-details.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     HomePageComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
   ],
   imports: [
     CommonModule,
     MainRoutingModule,
     CardModule,
     ButtonModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class MainModule { }

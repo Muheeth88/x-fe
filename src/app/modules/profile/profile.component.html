@@ -24,13 +24,13 @@
                                 </div>
                                    
                                 <div class="font-bold text-2xl text-blue-500 ">{{userDetails?.role}}</div>
-                                <div class="text-stone-500 text-sm   "><a href="#">-BingeWatch</a></div>
-                                <div  *ngIf="userDetails?.role === 'ADMIN' " class="cursor-pointer text-white my-2 py-2 w-full bg-slate-500 flex justify-center">
+                                <div class="text-stone-500 text-sm"><a href="#">-BingeWatch</a></div>
+                                <div *ngIf="userDetails?.role === 'ADMIN' " class="cursor-pointer text-white my-2 py-2 w-full bg-slate-500 flex justify-center">
                                     + Add Movie 
                                 </div>
                                 <div class="my-2 flex justify-end">
-                                    <button (click)="gotoLoginPage()" class="button-blue" *ngIf="userDetails?.role !== ('ADMIN' || 'USER' ) ">SignIn</button>
-                                    <button (click)="logout()" class="button-pink" *ngIf="userDetails?.role == ('ADMIN' || 'USER' ) ">Logout</button>
+                                    <button (click)="gotoLoginPage()" class="button-blue" *ngIf="!isUserLoggedIn">SignIn</button>
+                                    <button (click)="logout()" class="button-pink" *ngIf="isUserLoggedIn">Logout</button>
                                 </div>
                             </div>
                         </div>

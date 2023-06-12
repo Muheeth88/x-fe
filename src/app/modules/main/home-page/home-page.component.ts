@@ -13,6 +13,9 @@ export class HomePageComponent implements OnInit{
   faHeart = faHeart;
   faBookmark = faBookmark;
 
+  jwtToken = localStorage.getItem("JwtToken")
+  isUserLoggedIn: boolean = false;
+
   userDetailsString = localStorage.getItem("user")
   userObj: any = {};
   userId: number;
@@ -24,7 +27,9 @@ export class HomePageComponent implements OnInit{
   movieList: any = [];
 
   ngOnInit(): void {
-
+    if(this.jwtToken) {
+      this.isUserLoggedIn = true;
+    }
     this.getAllMovies();
     this.getTheUser();
     console.log("User Details", this.userObj)
@@ -63,21 +68,29 @@ export class HomePageComponent implements OnInit{
     let body = {
       movieId: movieId
     }
-    this.restApiService.addToWatchlist(body)
-    .subscribe((res) => {
-      console.log(res);
-      this.getTheUser();
-    })
+    if(this.isUserLoggedIn) {
+      this.restApiService.addToWatchlist(body)
+      .subscribe((res) => {
+        console.log(res);
+        this.getTheUser();
+      })
+    }else {
+      window.alert("SignIn to add this movie to Watchlist")
+    }
   }
 
   addToLikeList(movieId: number ) {
     let body = {
       movieId: movieId
     }
-    this.restApiService.addToLikelist(body)
-    .subscribe((res) => {
-      console.log(res);
-      this.getTheUser();
-    })
+    if(this.isUserLoggedIn) {
+      this.restApiService.addToLikelist(body)
+      .subscribe((res) => {
+        console.log(res);
+        this.getTheUser();
+      })
+    } else {
+      window.alert("SignIn to like this movie")
+    }
   }
 }
