@@ -23,14 +23,29 @@ export class RestApiService {
     return this.http.post(`${this.baseUrl}/users`, form)
   }
 
+  // --------------------------- get user by id
+  getUserById(userId: number) {
+    return this.http.get(`${this.baseUrl}/users/${userId}`)
+  }
+
   // ------------------ Get my WatchList
   getMyWatchlist() {
     return this.http.get(`${this.baseUrl}/movies/watchlist`)
   }
 
-  // ------------------ Get my WatchList
+  // ------------------------ Add to Watchlist
+  addToWatchlist(body: any) {
+    return this.http.post(`${this.baseUrl}/movies/watchlist`, body);
+  }
+
+  // ------------------ Get my LikeList
   getMyLikelist() {
     return this.http.get(`${this.baseUrl}/movies/likes`)
+  }
+
+  // ------------------------ Add to LikeList
+  addToLikelist(body: any) {
+    return this.http.post(`${this.baseUrl}/movies/likes`, body); 
   }
 
   // ----------- Movies
@@ -49,6 +64,11 @@ export class RestApiService {
         }
       })
     })
+  }
+
+  // -------------------get movie by Id
+  getMovieById(movieId: any) {
+    return this.http.get(`${this.baseUrl}/movies/${movieId}`)
   }
 
 }

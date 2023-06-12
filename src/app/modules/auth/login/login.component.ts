@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         console.log(res);
         localStorage.setItem("JwtToken", res.token);
         localStorage.setItem("user", JSON.stringify(res.user))
-        this.router.navigate(['/']);
+        this.router.navigate(['/', "home"]);
       },
       (error: any) => {
         console.log("Wrong Credentials");

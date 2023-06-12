@@ -17,8 +17,7 @@
                                     class="dp w-80  rounded-full" />
                             </div>
                             <div class="flex flex-col w-full md:w-2/3  mx-10">
-        
-                              
+    
                                 <div class="my-2">
                                     <button (click)="showWatchListDialog()" class="button-blue my-1">My WatchList</button>
                                     <button (click)="showLikeListDialog()" class="button-blue my-1">Liked Movies</button>
@@ -42,20 +41,29 @@
     </div>
 </div>
 
-<p-dialog header="Header" [(visible)]="showWatchlist" [style]="{width: '50vw'}">
-    <p>
-        watchlist
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
+<p-dialog header="My Watchlist" [(visible)]="showWatchlist" [style]="{width: '50vw'}">
+    <p *ngIf="!isUserLoggedIn">
+        Login to add movies to Watclist!
+     </p>
+    <div *ngIf="isUserLoggedIn"> 
+        <div class="my-2" *ngFor="let movie of myWatchList">
+            <p class="text-lg font-bold">{{movie?.title}}</p>
+        </div>
+        <p *ngIf="myWatchList.length === 0"> No Records!</p>
+    </div>
+   
 </p-dialog>
 
-<p-dialog header="Header" [(visible)]="showLikelist" [style]="{width: '50vw'}">
-    <p>
-        likes
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<p-dialog header="Liked Movies" [(visible)]="showLikelist" [style]="{width: '50vw'}">
+    <p *ngIf="!isUserLoggedIn">
+        Login to add movies to Likelist!
     </p>
+    <div *ngIf="isUserLoggedIn">
+        <div class="my-2" *ngFor="let movie of myLikeList">
+            <p class="text-lg font-bold">{{movie?.title}}</p>
+        </div>
+        <p *ngIf="myLikeList.length === 0"> No Records!</p>
+    </div>
 </p-dialog>
 
 

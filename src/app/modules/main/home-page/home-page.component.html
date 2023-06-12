@@ -1,4 +1,51 @@
-<h2 class="my-4 mx-auto">Movies List</h2>
-<p class="my-2" (click)="handleClick(movie)" *ngFor="let movie of movieList">
-    {{movie['title']}}
-</p>
+<div class="flex items-center">
+    <div class="flex flex-col p-2 m-2  max-w-7xl">
+        <div class="text-3xl font-medium text-center">All Movies List!</div>
+        <div class="text-sm mx-2 md:text-xl text-stone-500 text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, nam ipsum animi amet veritatis distinctio! Asperiores molestias natus, laborum magni tenetur culpa porro dignissimos optio laudantium eaque, adipisci nam repellat.</div>
+        <div class="flex my-3">
+        <div *ngFor="let movie of movieList" class="mx-2 card flex">
+            <p-card  class="cursor-pointer"  [style]="{ width: '300px' }">
+                <ng-template pTemplate="header">
+                    <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
+                </ng-template>
+                <div>
+
+                    <p [routerLink]="['details', movie.movieId]" class="mx-2 font-bold text-2xl">
+                        {{movie?.title}}
+                    </p>
+                  
+                    <p class="py-2">
+                        <span class="mx-2 text-lg font-bold text-left">Language</span>
+                        <span>{{movie?.originalLanguage}}</span>
+                    </p>
+                    <p class="flex">
+                        <span class="mx-2 text-lg font-bold text-left">Genre</span>
+                        <span class="flex justify-center">
+                            <span class="mx-1" *ngFor="let genre of movie?.genre">{{genre}}</span>
+                        </span>
+                    </p>
+                    <p>
+                        <span class="mx-2 text-lg font-bold text-left">Release Date</span>
+                        <span>{{movie.releaseDate | date}}</span>
+                    </p>
+                    <p>
+                        <span class="mx-2 text-lg font-bold text-left">Rating</span>
+                        <span>{{movie.rating}} / 10</span>
+                    </p>
+                </div>
+                <ng-template pTemplate="footer">
+                    <button *ngIf="!userDetails.likes.includes(movie.movieId)" (click)="addToLikeList(movie.movieId)" class="button-blue mx-1"> <fa-icon class="text-white mr-1" size="sm" [icon]="faHeart"></fa-icon>Like</button>
+                    <button *ngIf="userDetails.likes.includes(movie.movieId)" (click)="addToLikeList(movie.movieId)" class="button-blue mx-1"> <fa-icon class="text-red-700 mr-1" size="sm" [icon]="faHeart"></fa-icon>Liked</button>
+                    <button *ngIf="!userDetails.watchList.includes(movie.movieId)" (click)="addToWatchList(movie.movieId)" class="button-pink mx-1"> Add to Watchlist <fa-icon class="text-white mr-1" size="sm" [icon]="faBookmark"></fa-icon></button>
+                    <button *ngIf="userDetails.watchList.includes(movie.movieId)" (click)="addToWatchList(movie.movieId)" class="button-pink mx-1"> Watchlisted <fa-icon class="text-white mr-1" size="sm" [icon]="faBookmark"></fa-icon></button>
+                </ng-template>
+            </p-card>
+        </div>
+    </div>
+    </div>
+</div>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://use.fontawesome.com/03f8a0ebd4.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script> 
