@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
 import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
 
 
 
@@ -14,7 +15,8 @@ import { DialogModule } from 'primeng/dialog';
   imports: [
     CommonModule,
     ProfileRoutingModule,
-    DialogModule
+    DialogModule,
+    ButtonModule
   ]
 })
 export class ProfileModule { }

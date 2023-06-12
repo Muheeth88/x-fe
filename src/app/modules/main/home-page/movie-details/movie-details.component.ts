@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { RestApiService } from 'src/app/services/rest-api.service';
+import {faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import {faEdit } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-movie-details',
@@ -9,16 +12,40 @@ import { RestApiService } from 'src/app/services/rest-api.service';
 })
 export class MovieDetailsComponent implements OnInit{
 
- ;
+  faTrashCan = faTrashCan;
+  faEdit = faEdit;
+
+  jwtToken = localStorage.getItem("JwtToken")
+  isUserLoggedIn: boolean = false;
+
+  userString = localStorage.getItem("user")
+  userObj: any = {};
+  userId: number;
 
   movieId: any;
-  movieDetails = {}
+  movieDetails: any = {}
 
-  constructor( private route: ActivatedRoute, private restApiService: RestApiService) {}
+  reviewList: any = [];
+
+  reviewByList: any = [];
+
+  commentForm: FormGroup;
+  editCommentForm: FormGroup;
+
+  constructor( private route: ActivatedRoute, private restApiService: RestApiService, private fb: FormBuilder,) {}
 
   ngOnInit(): void {
+    if(this.jwtToken) {
+      this.isUserLoggedIn = true;
+    }
+    if(this.userString) {
+      this.userObj = JSON.parse(this.userString);
+      this.userId = this.userObj.userId;
+    }
     this.movieId = this.route.snapshot.paramMap.get('movieId');
     this.getMovieById();
+    this.commentFormCreation();
+    this.editCommentFormCreation();
   }
 
   getMovieById() {
@@ -27,8 +54,90 @@ export class MovieDetailsComponent implements OnInit{
       (res: any) => {
         console.log(res, "!!!!!!!!!!!!");
         this.movieDetails = res;
+        this.reviewList = res.reviews;
+        this.getReviewSource();
       }
     )
   }
-  
+
+  getReviewSource() {
+    for(let i = 0; i < this.reviewList.length; i++) {
+      let source = this.reviewList[i].userId;
+      console.log("Source", source)
+      this.restApiService.getUserById(source).subscribe((res: any) => {
+        let userName = res.userName;
+        console.log("UserName", userName);
+        this.reviewByList.push(userName);
+      })
+    }
+    console.log(this.reviewByList);
+  }
+
+  currentMovieId: number;
+  commentDialog: boolean = false;
+
+  openCommentDialog(movieId: number) {
+    if(this.isUserLoggedIn) {
+      this.currentMovieId = movieId;
+      this.commentDialog = true;
+    } else {
+      window.alert("SignIn to add reviews!")
+    }
+     
+  }
+
+  editCommentDialog: boolean = false;
+  currentReviewId: number;
+  openEditCommentDialog(review: any) {
+    this.currentReviewId = review.reviewId;
+    this.editCommentDialog = true;
+    this.editCommentForm.patchValue(review)
+  }
+
+  commentFormCreation() {
+    this.commentForm = this.fb.group({
+      movieId : [null],
+      comment: ["", Validators.required],
+      title: [""]
+    })
+  }
+
+  editCommentFormCreation() {
+    this.editCommentForm = this.fb.group({
+      movieId : [null],
+      comment: ["xxx", Validators.required],
+      title: [""]
+    })
+  }
+
+
+
+  editMyComment(editCommentForm: any ) {
+    this.restApiService.editReview(this.currentReviewId, editCommentForm.value)
+    .subscribe((res) => {
+      console.log(res);
+      console.log("Comment Edited!")
+      this.getMovieById();
+      this.editCommentDialog = false;
+    })
+  }
+
+  addMyComment(commentForm: any) {
+    this.restApiService.addReview(commentForm.value)
+    .subscribe((res) => {
+      console.log(res);
+      console.log("Comment Added!")
+      this.getMovieById();
+      this.commentDialog = false;
+    })
+  }
+
+  deleteMyComment(reviewId: number) {
+    this.restApiService.deleteReview(reviewId).subscribe((res) => {
+      console.log(res);
+      this.getMovieById();
+    })
+
+  }
+
 }

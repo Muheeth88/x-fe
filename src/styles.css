@@ -103,3 +103,7 @@ body {
 }
 
 /* Buttons - end */
+
+fa-icon{
+  cursor: pointer;
+}

@@ -93,12 +93,12 @@ export class RestApiService {
 
   // ------------------------ add a review
   addReview(body: any) {
-    return this.http.post(`${this.baseUrl}/movies/reviews`, body)
+    return this.http.post(`${this.baseUrl}/movies/review`, body)
   }
 
   // ----------------------- edit a review
   editReview(reviewId: number, body: any) {
-    return this.http.put(`${this.baseUrl}/movies/reviews/${reviewId}`, body)
+    return this.http.put(`${this.baseUrl}/movies/review/${reviewId}`, body)
   }
 
   // --------------------------- delete a review

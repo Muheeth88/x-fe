@@ -3,27 +3,56 @@
         <div class="flex flex-col md:flex-row max-w-7xl justify-center items-center ">
             <div class="overflow-hidden w-full m-4 shadow-sm flex flex-col md:flex-row justify-center">
                 <div class="flex flex-col md:flex-row items-center">
-                    <div class=" w-full overflow-hidden"> <img src="https://source.unsplash.com/500x350/?city" alt=""
+                    <div class=" w-96 overflow-hidden"> <img src="https://source.unsplash.com/500x350/?city" alt=""
                             class="" /> </div>
                     <div class="md:w-2/3 m-4 ">
                         <div class="flex text-gray-500 text-sm m-2">
                             <div class="m-1 font-bold">Released on</div>
-                            <div class="m-1">31 March, 2023</div>
+                            <div class="m-1">{{movieDetails?.releaseDate | date}}</div>
                         </div>
-                        <div class="font-bold text-black text-xl m-2">The 8 Best City Lights In The World! </div>
+                        <div class="font-bold text-black text-xl m-2">{{movieDetails?.title}} </div>
                         <div class="text-sm text-gray-500 mt-4 m-2">
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad, ipsa.</p>
                         </div>
-                        <div class="flex cursor-pointer">
-                            <div class="m-2"> <img src="https://source.unsplash.com/50x50/?man" alt=""
-                                    class=" rounded-full" /> </div>
-                            <div class="grid m-1">
-                                <div class="font-bold text-sm hover:text-gray-600 mt-2">Jason Bourne</div>
-                                <div class=" text-sm hover:text-gray-600">Student, Los Angeles</div>
-                            </div>
+                        <div class="">
+                            <p class="py-2">
+                                <span class="mx-2 text-lg font-bold text-left">Language</span>
+                                <span>{{movieDetails?.originalLanguage}}</span>
+                            </p>
+                            <p class="flex">
+                                <span class="mx-2 text-lg font-bold text-left">Genre</span>
+                                <span class="flex justify-center">
+                                    <span class="mx-1" *ngFor="let genre of movieDetails?.genre">{{genre}}</span>
+                                </span>
+                            </p>
+                            <p>
+                                <span class="mx-2 text-lg font-bold text-left">Rating</span>
+                                <span>{{movieDetails.rating}} / 10</span>
+                            </p>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="w-1/2">
+            <p class="text-xl font-bold">Comments</p>
+            <p class="flex justify-end">
+                <button (click)="openCommentDialog(movieDetails?.movieId)" class="button-blue text-end">+ Add Review</button>
+            </p>
+            <div *ngFor="let review of reviewList; let i = index">
+                <div class="flex justify-between">
+                    <p>
+                        {{review.comment}}
+                    </p>
+                    <span>
+                        <fa-icon *ngIf="userId === review?.userId" size="sm" (click)="deleteMyComment(review.reviewId)"  class="text-sky-600 mx-2" [icon]="faEdit"></fa-icon>
+                        <fa-icon *ngIf="userId === review?.userId" size="sm" (click)="openEditCommentDialog(review)"  class="text-red-400 mx-2" [icon]="faTrashCan"></fa-icon>
+                    </span>
+                </div>
+                <span class="ml-auto flex justify-end text-sm text-gray-500">
+                    <span>-by {{reviewByList[i]}}</span>
+                </span>
+                <hr class="my-2">
             </div>
         </div>
     </div>
@@ -32,3 +61,23 @@
 <script src="https://use.fontawesome.com/03f8a0ebd4.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<p-dialog header="Comment" [(visible)]="commentDialog" [style]="{width: '50vw'}">
+    <div>
+    <form [formGroup]="commentForm" (ngSubmit)="addMyComment(commentForm)">
+        <label class="mb-4">Write your review here</label> <br>
+        <textarea formControlName="comment" rows="5" cols="90" pInputTextarea></textarea>
+        <button type="submit" class="mt-1 button-pink text-right">Comment</button>
+    </form>
+    </div>
+</p-dialog>
+
+<p-dialog header="Edit Comment" [(visible)]="editCommentDialog" [style]="{width: '50vw'}">
+    <div>
+    <form [formGroup]="editCommentForm" (ngSubmit)="editMyComment(editCommentForm)">
+        <label class="mb-4">Write your review here</label> <br>
+        <textarea formControlName="comment" rows="5" cols="90" pInputTextarea></textarea>
+        <button type="submit" class="mt-1 button-pink text-right">Comment</button>
+    </form>
+    </div>
+</p-dialog>
