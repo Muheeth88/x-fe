@@ -45,8 +45,8 @@
                         {{review.comment}}
                     </p>
                     <span>
-                        <fa-icon *ngIf="userId === review?.userId" size="sm" (click)="deleteMyComment(review.reviewId)"  class="text-sky-600 mx-2" [icon]="faEdit"></fa-icon>
-                        <fa-icon *ngIf="userId === review?.userId" size="sm" (click)="openEditCommentDialog(review)"  class="text-red-400 mx-2" [icon]="faTrashCan"></fa-icon>
+                        <fa-icon *ngIf="userId === review?.userId" size="sm" (click)="openEditCommentDialog(review)"  class="text-sky-600 mx-2" [icon]="faEdit"></fa-icon>
+                        <fa-icon *ngIf="userId === review?.userId" size="sm" (click)="deleteMyComment(review.reviewId)"  class="text-red-400 mx-2" [icon]="faTrashCan"></fa-icon>
                     </span>
                 </div>
                 <span class="ml-auto flex justify-end text-sm text-gray-500">
