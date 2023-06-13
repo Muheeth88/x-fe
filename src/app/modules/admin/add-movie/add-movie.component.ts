@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RestApiService } from 'src/app/services/rest-api.service';
 
@@ -12,20 +12,56 @@ export class AddMovieComponent implements OnInit {
 
   constructor(private restApiService: RestApiService, private fb: FormBuilder, private router: Router) {}
 
+  genres: any = [];
+
   movieForm: FormGroup
 
   ngOnInit(): void {
    this.formCreation();
+   this.getGenres();
   }
 
   formCreation() {
     this.movieForm = this.fb.group({
-
+      title: ["", Validators.required],
+      tagline: [""],
+      plotSummary: [""],
+      originalLanguage: ["", Validators.required],
+      countryOfOrigin: ["", Validators.required],
+      rating:[""],
+      // releaseDate: ["", Validators.required],
+      releaseDate: new FormControl<Date | null>(null),
+      // genre: this.fb.array([])
+      genre: new FormControl<any[] | null>(null)
     })
   }
 
+  newGenre: any = []
+
   addMovie(movieForm: FormGroup) {
-    console.log(movieForm.value)
+    if(movieForm.value.genre) {
+      for(let i = 0; i < movieForm.value.genre.length; i++ ) {
+        this.newGenre.push(movieForm.value.genre[i].genre)
+      }
+      movieForm.value.genre = this.newGenre;
+    }
+    if(movieForm.value.releaseDate) {
+      // if(movieForm.value.releaseDate.getMonth() <= 10) {
+      //   movieForm.value.releaseDate.getMonth() = `0${movieForm.value.releaseDate.getMonth()}`
+      // }
+      movieForm.value.releaseDate = `${movieForm.value.releaseDate.getFullYear()}-0${movieForm.value.releaseDate.getMonth()}-${movieForm.value.releaseDate.getDate()}`
+    }
+    this.restApiService.addMovie(movieForm.value)
+    .subscribe((res) => {
+      console.log(res, "Movie Added!!!");
+      this.router.navigate(["/", "home"])
+    })
   }
 
+  getGenres() {
+    this.restApiService.getAllGenres().subscribe((res) => {
+      console.log(res);
+      this.genres = res;
+    })
+  }
 }

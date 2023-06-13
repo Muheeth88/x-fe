@@ -77,9 +77,11 @@ export class MovieDetailsComponent implements OnInit{
   commentDialog: boolean = false;
 
   openCommentDialog(movieId: number) {
+    console.log(movieId)
     if(this.isUserLoggedIn) {
       this.currentMovieId = movieId;
       this.commentDialog = true;
+      console.log(this.currentMovieId)
     } else {
       window.alert("SignIn to add reviews!")
     }
@@ -123,6 +125,7 @@ export class MovieDetailsComponent implements OnInit{
   }
 
   addMyComment(commentForm: any) {
+    commentForm.value.movieId = this.currentMovieId;
     this.restApiService.addReview(commentForm.value)
     .subscribe((res) => {
       console.log(res);
