@@ -27,7 +27,7 @@ export class MovieDetailsComponent implements OnInit{
 
   reviewList: any = [];
 
-  reviewByList: any = [];
+ 
 
   commentForm: FormGroup;
   editCommentForm: FormGroup;
@@ -55,23 +55,11 @@ export class MovieDetailsComponent implements OnInit{
         console.log(res, "!!!!!!!!!!!!");
         this.movieDetails = res;
         this.reviewList = res.reviews;
-        this.getReviewSource();
       }
     )
   }
 
-  getReviewSource() {
-    for(let i = 0; i < this.reviewList.length; i++) {
-      let source = this.reviewList[i].userId;
-      console.log("Source", source)
-      this.restApiService.getUserById(source).subscribe((res: any) => {
-        let userName = res.userName;
-        console.log("UserName", userName);
-        this.reviewByList.push(userName);
-      })
-    }
-    console.log(this.reviewByList);
-  }
+
 
   currentMovieId: number;
   commentDialog: boolean = false;
@@ -107,7 +95,7 @@ export class MovieDetailsComponent implements OnInit{
   editCommentFormCreation() {
     this.editCommentForm = this.fb.group({
       movieId : [null],
-      comment: ["xxx", Validators.required],
+      comment: ["", Validators.required],
       title: [""]
     })
   }
