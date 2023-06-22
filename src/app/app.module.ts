@@ -10,6 +10,7 @@ import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptor } from './interceptor/token.interceptor';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { TokenInterceptor } from './interceptor/token.interceptor';
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,
+    ButtonModule,
     ToastrModule.forRoot()
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}],

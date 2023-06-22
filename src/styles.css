@@ -20,7 +20,15 @@ body {
 /* Prime Ng */
 @import "primeng/resources/themes/nova/theme.css";
 @import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+
 /* ------------------------------------------------------------------- */
+
+/* Overrides */
+.ui-button-icon-only {
+  text-indent: initial;
+}
+/* ------------------ */
 
 body {
   margin: 0;

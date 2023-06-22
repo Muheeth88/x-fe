@@ -6,7 +6,7 @@ import { AddMovieComponent } from './add-movie/add-movie.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { CalendarModule } from 'primeng/calendar';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ButtonModule } from 'primeng/button';
 
 
 @NgModule({
@@ -19,7 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     MultiSelectModule,
-    CalendarModule
+    CalendarModule,
+    ButtonModule
   ]
 })
 export class AdminModule { }
