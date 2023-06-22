@@ -17,8 +17,8 @@ export class AddMovieComponent implements OnInit {
   movieForm: FormGroup
 
   ngOnInit(): void {
+    this.getGenres();
    this.formCreation();
-   this.getGenres();
   }
 
   formCreation() {
@@ -30,7 +30,7 @@ export class AddMovieComponent implements OnInit {
       countryOfOrigin: ["", Validators.required],
       rating:[""],
       // releaseDate: ["", Validators.required],
-      releaseDate: new FormControl<Date | null>(null),
+      releaseDate:  new FormControl<Date | null>(null),
       // genre: this.fb.array([])
       genre: new FormControl<any[] | null>(null)
     })
@@ -45,12 +45,7 @@ export class AddMovieComponent implements OnInit {
       }
       movieForm.value.genre = this.newGenre;
     }
-    if(movieForm.value.releaseDate) {
-      // if(movieForm.value.releaseDate.getMonth() <= 10) {
-      //   movieForm.value.releaseDate.getMonth() = `0${movieForm.value.releaseDate.getMonth()}`
-      // }
-      movieForm.value.releaseDate = `${movieForm.value.releaseDate.getFullYear()}-0${movieForm.value.releaseDate.getMonth()}-${movieForm.value.releaseDate.getDate()}`
-    }
+    console.log(movieForm.value)
     this.restApiService.addMovie(movieForm.value)
     .subscribe((res) => {
       console.log(res, "Movie Added!!!");

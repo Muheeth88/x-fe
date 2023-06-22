@@ -52,7 +52,7 @@ export class HomePageComponent implements OnInit{
     .subscribe({
       next: ((res: any) => {
         console.log(res, "!!!");
-        this.movieList = res;
+        this.movieList = res.content;
       }),
       error: ((err) => {
         console.log(err.message);

@@ -39,18 +39,14 @@
             <div class="my-2">
                 <label class="frmLbl" for="name">Release Date</label> <br>
                 <div class="searchBox mt-2 w-2/3">
-                    <p-calendar formControlName="releaseDate"></p-calendar>
+                    <p-calendar formControlName="releaseDate" dataType="string" [showIcon]="true" dateFormat="yy-mm-dd"></p-calendar>
                 </div>
             </div>
         
             <div class="my-2">
                 <label class="frmLbl">Genre</label> <br>
                 <div class="searchBox mt-2 w-2/3">
-                    <!-- <select class="filterInput w-full"  formControlName="genre">
-                        <option class="boxInsideSelect" disabled selected  value="">Select genre</option>
-                        <option *ngFor="let genre of genres" class="boxInsideSelect"  value={{genre.genre}}>{{genre.genre}}</option> -->
                         <p-multiSelect [options]="genres" formControlName="genre" optionLabel="genre"></p-multiSelect>
-                    <!-- </select>  -->
                 </div>
             </div>
         </div>
