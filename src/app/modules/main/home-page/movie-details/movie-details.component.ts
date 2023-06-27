@@ -27,8 +27,6 @@ export class MovieDetailsComponent implements OnInit{
 
   reviewList: any = [];
 
- 
-
   commentForm: FormGroup;
   editCommentForm: FormGroup;
 
@@ -81,7 +79,7 @@ export class MovieDetailsComponent implements OnInit{
   openEditCommentDialog(review: any) {
     this.currentReviewId = review.reviewId;
     this.editCommentDialog = true;
-    this.editCommentForm.patchValue(review)
+    this.editCommentForm.patchValue(review);
   }
 
   commentFormCreation() {
@@ -128,7 +126,6 @@ export class MovieDetailsComponent implements OnInit{
       console.log(res);
       this.getMovieById();
     })
-
   }
 
 }

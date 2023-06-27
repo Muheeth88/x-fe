@@ -50,9 +50,9 @@ export class RestApiService {
 
   // -----------get all Movies
 
-  getAllMovies() {
+  getAllMovies(pageNumber: number, pageSize: number, orderBy: string, sortDirection: string, title: string) {
     return new Observable((observable) => {
-      this.http.get(`${this.baseUrl}/movies`)
+      this.http.get(`${this.baseUrl}/movies?pageNumber=${pageNumber}&pageSize=${pageSize}&orderBy=${orderBy}&sortDirection=${sortDirection}&title=${title}`)
       .subscribe({
         next: (res: any) => {
           observable.next(res)

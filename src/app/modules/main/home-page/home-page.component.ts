@@ -13,6 +13,13 @@ export class HomePageComponent implements OnInit{
   faHeart = faHeart;
   faBookmark = faBookmark;
 
+  pageNumber: number = 0;
+  pageSize: number = 100;
+  orderBy: string = "title";
+  sortDirection: string = "asc"
+  title: string = ""
+
+
   jwtToken = localStorage.getItem("JwtToken")
   isUserLoggedIn: boolean = false;
 
@@ -48,7 +55,7 @@ export class HomePageComponent implements OnInit{
   }
 
   getAllMovies() {
-    this.restApiService.getAllMovies()
+    this.restApiService.getAllMovies(this.pageNumber, this.pageSize, this.orderBy, this.sortDirection, this.title)
     .subscribe({
       next: ((res: any) => {
         console.log(res, "!!!");
@@ -92,5 +99,10 @@ export class HomePageComponent implements OnInit{
     } else {
       window.alert("SignIn to like this movie")
     }
+  }
+
+  onTitleInput(event: any) {
+    this.title = event.target.value;
+    this.getAllMovies();
   }
 }
